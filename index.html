@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#030712">
-<link rel="manifest" href="manifest.json">
 <title>BlueVenger — Biblioteca</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
@@ -13,22 +12,39 @@ if(window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudf
 <style>
 :root{--bg:#030712;--surface:#0b1329;--surface2:#0f172a;--glass:rgba(11,19,41,.78);--border:#1e293b;--border-soft:#ffffff14;--text:#f8fafc;--muted:#94a3b8;--primary:#3b82f6;--primary2:#1d4ed8;--radius:16px}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
-body{background-image:radial-gradient(circle at 18% -8%,#1e3a8a3d 0%,transparent 42%),radial-gradient(circle at 88% 4%,#4c1d9536 0%,transparent 38%),radial-gradient(circle at 50% 0%,#1e1b4b 0%,#030712 55%);background-attachment:fixed}button,input,select{font:inherit}button{cursor:pointer;color:inherit;border:0;transition:transform .15s cubic-bezier(.4,0,.2,1),box-shadow .2s ease,background-color .2s ease,opacity .15s ease,filter .2s ease}button:active{transform:scale(.94)}button:disabled{opacity:.4;cursor:default;transform:none!important}
+body{background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer;color:inherit;border:0;transition:transform .15s cubic-bezier(.4,0,.2,1),box-shadow .2s ease,background-color .2s ease,opacity .15s ease,filter .2s ease}button:active{transform:scale(.94)}button:disabled{opacity:.4;cursor:default;transform:none!important}
 ::selection{background:#3b82f655;color:#fff}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1e293b;border-radius:99px;border:2px solid var(--bg)}::-webkit-scrollbar-thumb:hover{background:#334155}
 button:focus-visible,input:focus-visible,select:focus-visible,[contenteditable]:focus-visible{outline:2px solid #3b82f680;outline-offset:2px}
 header{position:sticky;top:0;z-index:30;background:#030712d1;backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--border-soft);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 1px 0 #3b82f61f,0 18px 40px -24px #000d}
-.brand{font-weight:900;font-size:20px;display:flex;align-items:center;gap:9px;background:linear-gradient(90deg,#60a5fa,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;letter-spacing:-.01em;filter:drop-shadow(0 2px 14px #3b82f64d)}
+.brand{font-weight:900;font-size:20px;display:flex;align-items:center;gap:8px;white-space:nowrap;letter-spacing:-.01em;position:relative}
+.brand-atom{width:24px;height:24px;position:relative;flex:0 0 auto}
+.brand-atom .nucleus{position:absolute;top:50%;left:50%;width:6px;height:6px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 6px #fff,0 0 14px #ffffffcc,0 0 22px #93c5fd99;animation:nucleusPulse 2.2s ease-in-out infinite}
+.brand-atom .orbit{position:absolute;top:50%;left:50%;width:24px;height:10px;margin:-5px 0 0 -12px;border:1.4px solid rgba(255,255,255,.55);border-radius:50%}
+.brand-atom .orbit::before{content:'';position:absolute;top:-2px;left:50%;width:3.5px;height:3.5px;margin-left:-1.75px;background:#fff;border-radius:50%;box-shadow:0 0 6px #fff,0 0 10px #fff}
+.brand-atom .orbit1{animation:atomSpin1 3.2s linear infinite}
+.brand-atom .orbit2{transform:rotate(60deg);animation:atomSpin2 3.2s linear infinite}
+.brand-atom .orbit3{transform:rotate(-60deg);animation:atomSpin3 3.6s linear infinite}
+.brand-text{background:linear-gradient(90deg,#60a5fa,#ffffff,#93c5fd,#3b82f6,#60a5fa);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:brandAurora 7s linear infinite,brandGlow 3.2s ease-in-out infinite}
+.brand-spark{font-size:11px;color:#fff;line-height:1;transform:translateY(-8px);animation:brandTwinkle 2.4s ease-in-out infinite;text-shadow:0 0 6px #fff,0 0 14px #93c5fd}
+@keyframes atomSpin1{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes atomSpin2{from{transform:rotate(60deg)}to{transform:rotate(420deg)}}
+@keyframes atomSpin3{from{transform:rotate(-60deg)}to{transform:rotate(300deg)}}
+@keyframes nucleusPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.3)}}
+@keyframes brandAurora{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes brandGlow{0%,100%{filter:drop-shadow(0 2px 10px #ffffff4d)}50%{filter:drop-shadow(0 2px 20px #ffffffb3)}}
+@keyframes brandTwinkle{0%,100%{opacity:.25;transform:translateY(-8px) scale(.7)}50%{opacity:1;transform:translateY(-10px) scale(1.15)}}
+@media(prefers-reduced-motion:reduce){.brand-atom *,.brand-text,.brand-spark{animation:none}}
 .header-actions{display:flex;align-items:center;gap:10px}.lang-selector{position:relative}
 .lang-btn{background:var(--surface2);border:1px solid var(--border-soft);color:var(--text);padding:7px 12px;border-radius:10px;font-weight:700;font-size:12px;display:flex;gap:6px;align-items:center;transition:border-color .2s ease,background-color .2s ease}.lang-btn:hover{border-color:#3b82f666;background:#0f172ad9}
 .lang-menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;box-shadow:0 20px 45px -10px #000c,inset 0 1px 0 #ffffff0f;display:none;overflow:hidden;z-index:50;min-width:175px}.lang-menu.show{display:flex;flex-direction:column}
 .lang-menu button{background:transparent;color:var(--text);padding:11px 14px;text-align:left;font-size:12px;font-weight:600}.lang-menu button:hover{background:#3b82f626}
-main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}.hero h1{margin:0;font-size:29px;font-weight:800;letter-spacing:-.02em;text-shadow:0 2px 24px #0006}.hero p{margin:5px 0 0;color:var(--muted);font-size:14px}
+main{position:relative;z-index:1;max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}.hero h1{margin:0;font-size:29px;font-weight:800;letter-spacing:-.02em;text-shadow:0 2px 24px #0006}.hero p{margin:5px 0 0;color:var(--muted);font-size:14px}
 .top-nav{display:flex;gap:4px;background:#0f172aa6;padding:4px;border-radius:12px;border:1px solid var(--border-soft);box-shadow:inset 0 1px 3px #00000059}.top-nav button{background:transparent;padding:7px 12px;border-radius:8px;color:var(--muted);font-weight:700;font-size:12px;transition:background-color .25s ease,color .25s ease}.top-nav button.active{background:var(--primary);color:#fff;box-shadow:0 3px 12px -2px #3b82f680}
 .primary{position:relative;overflow:hidden;background:linear-gradient(135deg,#60a5fa,var(--primary) 45%,var(--primary2));padding:11px 18px;border-radius:12px;font-weight:800;color:#fff;letter-spacing:.01em;box-shadow:0 6px 18px -4px #3b82f680,inset 0 1px 0 #ffffff40}.primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,#ffffff33 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s ease;pointer-events:none}.primary:hover::after{transform:translateX(120%)}.primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px -4px #3b82f699,inset 0 1px 0 #ffffff40}.primary:active{transform:translateY(0) scale(.96)}.field{width:100%;background:var(--surface2);border:1px solid var(--border-soft);color:var(--text);padding:12px 14px;border-radius:12px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}.field:focus{border-color:var(--primary);box-shadow:0 0 0 3px #3b82f62e}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.search{flex:1;min-width:190px}.select{background:var(--surface2);border:1px solid var(--border-soft);color:var(--text);padding:11px 13px;border-radius:12px;transition:border-color .2s ease,box-shadow .2s ease}.select:focus{border-color:var(--primary);box-shadow:0 0 0 3px #3b82f62e}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.search{flex:1;min-width:190px}.search-wrap{position:relative;display:flex;align-items:center}.search-wrap .field{padding-left:38px}.field-icon{position:absolute;left:13px;color:var(--muted);pointer-events:none}.select{background:var(--surface2);border:1px solid var(--border-soft);color:var(--text);padding:11px 13px;border-radius:12px;transition:border-color .2s ease,box-shadow .2s ease}.select:focus{border-color:var(--primary);box-shadow:0 0 0 3px #3b82f62e}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:16px}.card{background:var(--glass);backdrop-filter:blur(14px) saturate(150%);border:1px solid var(--border-soft);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 28px -8px #000a,inset 0 1px 0 #ffffff0f;display:flex;flex-direction:column;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease,border-color .25s ease;animation:cardIn .45s cubic-bezier(.16,1,.3,1) both}.card:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 22px 46px -12px #000c,0 0 0 1px #3b82f640;border-color:#3b82f64d}.card:active{transform:translateY(-2px) scale(.99)}@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes fadeInPage{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeInPage .35s cubic-bezier(.16,1,.3,1)}
-.cover{height:190px;background:linear-gradient(145deg,#111827,#090d19);display:grid;place-items:center;overflow:hidden;box-shadow:inset 0 -30px 40px -30px #000a}.cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}.card:hover .cover img{transform:scale(1.06)}.cover-icon{font-size:42px;opacity:.85}.cardbody{padding:13px;display:flex;flex-direction:column;flex:1}.title{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:11px;color:var(--muted);margin-top:5px}.actions{display:flex;gap:7px;margin-top:auto;padding-top:11px}.small{flex:1;background:#1e293bb3;padding:8px;border-radius:9px;font-size:12px;font-weight:700;text-align:center;border:1px solid #ffffff0d;transition:filter .15s ease,background-color .15s ease}.small:hover{filter:brightness(1.18)}.danger{color:#fca5a5;background:#ef44441f;border:1px solid #ef44444d}.favorite{color:#fbbf24;background:#f59e0b1c;border:1px solid #f59e0b44}
+.cover{height:190px;background:linear-gradient(145deg,#111827,#090d19);display:grid;place-items:center;overflow:hidden;box-shadow:inset 0 -30px 40px -30px #000a}.cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}.card:hover .cover img{transform:scale(1.06)}.cover-icon{opacity:.85;color:var(--muted)}.cover-icon svg{width:44px;height:44px}.cardbody{padding:13px;display:flex;flex-direction:column;flex:1}.title{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:11px;color:var(--muted);margin-top:5px}.actions{display:flex;gap:7px;margin-top:auto;padding-top:11px}.small{flex:1;background:#1e293bb3;padding:8px;border-radius:9px;font-size:12px;font-weight:700;text-align:center;border:1px solid #ffffff0d;transition:filter .15s ease,background-color .15s ease}.small:hover{filter:brightness(1.18)}.danger{color:#fca5a5;background:#ef44441f;border:1px solid #ef44444d}.favorite{color:#fbbf24;background:#f59e0b1c;border:1px solid #f59e0b44}
 .progress{height:6px;background:#0b1329;border-radius:99px;overflow:hidden;margin-top:9px;box-shadow:inset 0 1px 3px #00000066,inset 0 0 0 1px #ffffff0a}.progress i{display:block;height:100%;background:linear-gradient(90deg,#1d4ed8,#3b82f6,#60a5fa);border-radius:99px;box-shadow:0 0 10px #3b82f680;position:relative;overflow:hidden;transition:width .5s cubic-bezier(.16,1,.3,1)}.progress i::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,#ffffff5c 50%,transparent 75%);background-size:220% 100%;animation:pageShine 2.8s linear infinite}@keyframes pageShine{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .page-stats-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
 .page-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#1e3a8a40,#0f172ae6);border:1px solid #3b82f64d;padding:4px 10px 4px 8px;border-radius:99px;font-size:11px;font-weight:800;color:#cbd5e1;box-shadow:inset 0 1px 0 #ffffff14,0 3px 8px -3px #000a;letter-spacing:.01em}
@@ -68,9 +84,12 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 .reader{position:fixed;inset:0;background:#020617;z-index:90;display:flex;flex-direction:column;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px);transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}.reader.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}.readerbar{height:60px;display:flex;align-items:center;gap:10px;padding:0 12px;background:#030712eb;backdrop-filter:blur(18px);border-bottom:1px solid var(--border-soft)}
 .viewer{flex:1;overflow:auto;display:flex;justify-content:center;padding:18px;background:#020617;touch-action:pan-y}.pages{display:flex;flex-direction:column;align-items:center;gap:15px;width:100%;transition:transform .15s cubic-bezier(.4,0,.2,1),opacity .18s ease;transform-origin:top center}.pages canvas{max-width:100%;box-shadow:0 14px 44px -6px #000c;border-radius:3px;background:#fff;transition:opacity .18s ease}.reader-tools{display:flex;gap:6px;align-items:center}.reader-tools button{background:#1e293b;padding:7px 10px;border-radius:8px;font-weight:700;transition:filter .15s ease}.reader-tools button:hover{filter:brightness(1.2)}#zoomLabel{color:#60a5fa;font-size:12px;font-weight:800;min-width:38px;text-align:center;user-select:none}
 .editor-meta{display:flex;justify-content:flex-end;color:var(--muted);font-size:11px;margin-top:6px}
-.note-date{color:var(--muted);font-size:11px;margin-top:4px}
+.note-date{color:var(--muted);font-size:11px;margin-top:4px;display:flex;align-items:center;gap:5px}
 .note-search{margin-bottom:14px}
-.icon-btn{flex:0 0 auto!important;padding:8px 9px!important;font-size:13px}
+.icon-btn{flex:0 0 auto!important;padding:8px 9px!important;font-size:13px;display:inline-flex!important;align-items:center;justify-content:center}
+.icon-btn svg{width:14px;height:14px;display:block}
+.inline-ic{display:inline-flex;vertical-align:-3px;margin-right:5px}
+.inline-ic svg{width:13px;height:13px;display:block}
 .toolbar button.active{background:var(--primary);color:#fff}
 .cover-wrap{position:relative;cursor:pointer}
 .field[type="file"]{transition:border-color .2s ease}
@@ -84,21 +103,23 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 </style>
 </head>
 <body>
+<div id="skyFx" class="sky-fx" aria-hidden="true"></div>
 <header>
-<div class="brand">📘 BlueVenger</div>
+<div class="brand"><span class="brand-atom" aria-hidden="true"><span class="orbit orbit1"></span><span class="orbit orbit2"></span><span class="orbit orbit3"></span><span class="nucleus"></span></span><span class="brand-text">BlueVenger</span><span class="brand-spark" aria-hidden="true">✦</span></div>
 <div class="header-actions">
 <nav class="top-nav">
 <button id="navLib" class="active" onclick="switchTab('libraryPage')" data-i18n="navLib">Biblioteca</button>
 <button id="navSites" onclick="switchTab('sitesPage')" data-i18n="navSites">Sites</button>
 <button id="navNotes" onclick="switchTab('notesPage')" data-i18n="navNotes">Notas</button>
+<button id="navTrash" onclick="switchTab('trashPage')" data-i18n="navTrash">Lixeira</button>
 </nav>
 <div class="lang-selector">
 <button id="langBtn" class="lang-btn" onclick="toggleLangMenu()" aria-haspopup="true" aria-expanded="false">
-<span id="currentFlag">🇧🇷</span><span id="currentLangLabel">PT-BR</span> ▾
+<span id="currentLangFlag" class="lang-globe" aria-hidden="true">🇧🇷</span><span id="currentLangLabel">PT-BR</span> <svg class="lang-caret" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
 </button>
 <div id="langMenu" class="lang-menu">
-<button onclick="setLanguage('pt-BR')">🇧🇷 Português (Brasil)</button>
-<button onclick="setLanguage('es-MX')">🇲🇽 Español (México)</button>
+<button onclick="setLanguage('pt-BR')"><span aria-hidden="true">🇧🇷</span> Português (Brasil)</button>
+<button onclick="setLanguage('es-MX')"><span aria-hidden="true">🇲🇽</span> Español (México)</button>
 </div>
 </div>
 </div>
@@ -107,7 +128,7 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 <main>
 <section id="libraryPage">
 <div class="hero"><div><h1 data-i18n="libTitle">Biblioteca</h1><p data-i18n="libDesc">Seus documentos organizados e disponíveis offline.</p></div><button class="primary" onclick="openAddModal()" data-i18n="newPdf">＋ Novo PDF</button></div>
-<div class="controls"><input id="bookSearch" class="field search" placeholder="🔎 Buscar por nome..." data-i18n-placeholder="searchPlaceholder" oninput="renderBooks()"><select id="bookSort" class="select" onchange="renderBooks()"><option value="recent" data-i18n="sortRecent">Mais recentes</option><option value="name" data-i18n="sortName">Nome A–Z</option><option value="progress" data-i18n="sortProgress">Mais lidos</option><option value="favorite" data-i18n="sortFavorite">Favoritos</option></select></div>
+<div class="controls"><div class="search-wrap search"><svg class="field-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="bookSearch" class="field" placeholder="Buscar por nome..." data-i18n-placeholder="searchPlaceholder" oninput="renderBooks()"></div><select id="bookSort" class="select" onchange="renderBooks()"><option value="recent" data-i18n="sortRecent">Mais recentes</option><option value="name" data-i18n="sortName">Nome A–Z</option><option value="progress" data-i18n="sortProgress">Mais lidos</option><option value="favorite" data-i18n="sortFavorite">Favoritos</option></select></div>
 <div id="grid" class="grid"></div>
 </section>
 
@@ -140,18 +161,18 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 <div class="toolbar-group">
 <button onclick="execNote('insertUnorderedList')" data-i18n="bulletList">• Lista</button>
 <button onclick="execNote('insertOrderedList')" data-i18n="numberList" data-i18n-title="toolNumberList" title="Lista numerada">1. Lista</button>
-<button onclick="insertNoteChecklist()" data-i18n="checklistBtn" data-i18n-title="toolChecklist" title="Lista de tarefas">☑ Tarefa</button>
+<button onclick="insertNoteChecklist()" data-i18n-title="toolChecklist" title="Lista de tarefas"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:4px"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span data-i18n="checklistBtn">Tarefa</span></button>
 </div>
 <div class="toolbar-sep"></div>
 <div class="toolbar-group">
-<button class="icon-btn" onclick="insertNoteLink()" data-i18n-title="toolInsertLink" title="Inserir link">🔗</button>
+<button class="icon-btn" onclick="insertNoteLink()" data-i18n-title="toolInsertLink" title="Inserir link"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><path d="M8 12h8"/></svg></button>
 <button class="icon-btn" onclick="execNote('undo')" data-i18n-title="toolUndo" title="Desfazer">↶</button>
 <button class="icon-btn" onclick="execNote('redo')" data-i18n-title="toolRedo" title="Refazer">↷</button>
 <button onclick="execNote('removeFormat')" data-i18n="clearFormat">Limpar</button>
 </div>
 <div class="toolbar-break"></div>
 <div class="toolbar-group" id="markerGroup">
-<span class="toolbar-label">🖍️</span>
+<span class="toolbar-label" title="Marcador"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69 17.66 8.35a8 8 0 1 1-11.32 0z"/></svg></span>
 <button class="marker-swatch" style="background:#fde047" data-color="#fde047" onclick="setNoteMarker('#fde047')" data-i18n-title="markerYellow" data-i18n-aria="markerYellow" title="Marcador amarelo" aria-label="Marcador amarelo"></button>
 <button class="marker-swatch" style="background:#86efac" data-color="#86efac" onclick="setNoteMarker('#86efac')" data-i18n-title="markerGreen" data-i18n-aria="markerGreen" title="Marcador verde" aria-label="Marcador verde"></button>
 <button class="marker-swatch" style="background:#93c5fd" data-color="#93c5fd" onclick="setNoteMarker('#93c5fd')" data-i18n-title="markerBlue" data-i18n-aria="markerBlue" title="Marcador azul" aria-label="Marcador azul"></button>
@@ -161,7 +182,7 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 </div>
 <div class="toolbar-sep"></div>
 <div class="toolbar-group" id="textColorGroup">
-<span class="toolbar-label">🎨</span>
+<span class="toolbar-label" title="Cor do texto"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 1 0-16 7 7 0 0 1 7 7 3 3 0 0 1-3 3h-1.5a1.5 1.5 0 0 0 0 3H15a1 1 0 0 1 1 1 2 2 0 0 1-2 2z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="10.5" cy="7" r="1"/><circle cx="14.5" cy="7.5" r="1"/></svg></span>
 <button class="marker-swatch" style="background:#f8fafc" data-color="#f8fafc" onclick="setNoteTextColor('#f8fafc')" data-i18n-title="textWhite" data-i18n-aria="textWhite" title="Texto branco" aria-label="Texto branco"></button>
 <button class="marker-swatch" style="background:#f87171" data-color="#f87171" onclick="setNoteTextColor('#f87171')" data-i18n-title="textRed" data-i18n-aria="textRed" title="Texto vermelho" aria-label="Texto vermelho"></button>
 <button class="marker-swatch" style="background:#60a5fa" data-color="#60a5fa" onclick="setNoteTextColor('#60a5fa')" data-i18n-title="textBlue" data-i18n-aria="textBlue" title="Texto azul" aria-label="Texto azul"></button>
@@ -172,8 +193,13 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 <div id="noteContentInput" class="rich-editor" contenteditable="true" oninput="updateNoteMeta()"></div>
 <div class="editor-meta"><span id="noteWordCount">0 palavras</span></div>
 <button class="primary" style="width:100%;margin-top:12px" onclick="saveNote()" data-i18n="saveNote">Salvar Anotação</button>
-<input id="noteSearch" class="field note-search" placeholder="🔎 Buscar em suas anotações..." data-i18n-placeholder="noteSearchPlaceholder" oninput="renderNotes()" style="margin-top:20px">
+<div class="search-wrap note-search" style="margin-top:20px"><svg class="field-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="noteSearch" class="field" placeholder="Buscar em suas anotações..." data-i18n-placeholder="noteSearchPlaceholder" oninput="renderNotes()"></div>
 <div id="notesContainer" class="site-list"></div>
+</section>
+
+<section id="trashPage" style="display:none">
+<div class="hero"><div><h1 data-i18n="trashTitle">Lixeira</h1><p data-i18n="trashDesc">Itens excluídos ficam aqui por 3 dias antes de serem removidos definitivamente.</p></div><button class="danger" onclick="emptyTrashNow()"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg><span data-i18n="emptyTrashBtn">Esvaziar lixeira</span></button></div>
+<div id="trashContainer" class="site-list"></div>
 </section>
 </main>
 
@@ -214,7 +240,7 @@ main{max-width:1100px;margin:auto;padding:20px 16px 40px}.hero{padding:12px 0 18
 const translations={
 'pt-BR':{
 navLib:'Biblioteca',navSites:'Sites',navNotes:'Notas',libTitle:'Biblioteca',libDesc:'Seus documentos organizados e disponíveis offline.',newPdf:'＋ Novo PDF',
-searchPlaceholder:'🔎 Buscar por nome...',sortRecent:'Mais recentes',sortName:'Nome A–Z',sortProgress:'Mais lidos',sortFavorite:'Favoritos',
+searchPlaceholder:'Buscar por nome...',sortRecent:'Mais recentes',sortName:'Nome A–Z',sortProgress:'Mais lidos',sortFavorite:'Favoritos',
 emptyBooks:'Nenhum PDF encontrado.',emptySites:'Nenhum site salvo.',emptyNotes:'Nenhuma anotação salva.',sitesTitle:'Links Rápidos',sitesDesc:'Acesse suas ferramentas favoritas.',
 siteNamePlaceholder:'Nome do site',siteUrlPlaceholder:'https://...',saveLink:'Salvar Link',notesTitle:'Anotações',notesDesc:'Organize suas ideias e estudos.',
 noteTitlePlaceholder:'Título da nota',bulletList:'• Lista',clearFormat:'Limpar',saveNote:'Salvar Anotação',
@@ -224,16 +250,19 @@ toastSelectPdf:'Selecione um arquivo PDF!',toastNotPdf:'O arquivo precisa ser PD
 toastSaveError:'Erro ao salvar o PDF.',toastDeleteError:'Erro ao excluir o PDF.',toastPdfNotFound:'Arquivo PDF não encontrado.',toastOpenError:'Não foi possível abrir o PDF.',
 toastLinkSaved:'Link salvo!',toastFillFields:'Preencha nome e URL!',toastNoteEmpty:'Escreva algo na nota!',toastNoteSaved:'Anotação salva!',toastDb:'Não foi possível abrir o armazenamento local.',
 toastLocalPdf:'PDF salvo, mas este navegador não permite armazenamento persistente de arquivos neste modo. Abra o HTML por um servidor local ou hospede o site para guardar PDFs.',
-coverLabel:'Capa personalizada (opcional)',coverHint:'Se não escolher uma imagem, a primeira página do PDF será usada como capa.',changeCover:'Trocar capa',toastCoverUpdated:'Capa atualizada!',noteSearchPlaceholder:'🔎 Buscar em suas anotações...',numberList:'1. Lista',
+coverLabel:'Capa personalizada (opcional)',coverHint:'Se não escolher uma imagem, a primeira página do PDF será usada como capa.',changeCover:'Trocar capa',toastCoverUpdated:'Capa atualizada!',noteSearchPlaceholder:'Buscar em suas anotações...',numberList:'1. Lista',
 choosePdfFile:'Escolher arquivo PDF',choosePdfCoverFile:'Escolher imagem de capa',noFileChosen:'Nenhum arquivo selecionado',
-toolBold:'Negrito',toolItalic:'Itálico',toolUnderline:'Sublinhado',toolHeading:'Título',toolNumberList:'Lista numerada',toolChecklist:'Lista de tarefas',checklistBtn:'☑ Tarefa',toolInsertLink:'Inserir link',toolUndo:'Desfazer',toolRedo:'Refazer',
+toolBold:'Negrito',toolItalic:'Itálico',toolUnderline:'Sublinhado',toolHeading:'Título',toolNumberList:'Lista numerada',toolChecklist:'Lista de tarefas',checklistBtn:'Tarefa',toolInsertLink:'Inserir link',toolUndo:'Desfazer',toolRedo:'Refazer',
 noteColorLabelText:'Cor da nota:',tagNone:'Sem cor',tagBlue:'Azul',tagGreen:'Verde',tagYellow:'Amarelo',tagRed:'Vermelho',tagPurple:'Roxo',
 markerYellow:'Marcador amarelo',markerGreen:'Marcador verde',markerBlue:'Marcador azul',markerPink:'Marcador rosa',markerPurple:'Marcador roxo',markerNone:'Remover marcador',
-textWhite:'Texto branco',textRed:'Texto vermelho',textBlue:'Texto azul',textGreen:'Texto verde',textYellow:'Texto amarelo'
+textWhite:'Texto branco',textRed:'Texto vermelho',textBlue:'Texto azul',textGreen:'Texto verde',textYellow:'Texto amarelo',
+navTrash:'Lixeira',trashTitle:'Lixeira',trashDesc:'Itens excluídos ficam aqui por 3 dias antes de serem removidos definitivamente.',emptyTrash:'A lixeira está vazia.',
+restore:'Restaurar',deleteForever:'Excluir definitivamente',trashExpiresIn:'Expira em {n} dia(s)',typeBook:'PDF',typeSite:'Site',typeNote:'Nota',
+toastMovedTrash:'Movido para a lixeira!',toastRestored:'Item restaurado!',toastPurged:'Item excluído definitivamente.',confirmPurge:'Excluir este item definitivamente? Essa ação não pode ser desfeita.',emptyTrashBtn:'Esvaziar lixeira'
 },
 'es-MX':{
 navLib:'Biblioteca',navSites:'Sitios',navNotes:'Notas',libTitle:'Biblioteca',libDesc:'Tus documentos organizados y disponibles sin conexión.',newPdf:'＋ Nuevo PDF',
-searchPlaceholder:'🔎 Buscar por nombre...',sortRecent:'Más recientes',sortName:'Nombre A–Z',sortProgress:'Más leídos',sortFavorite:'Favoritos',
+searchPlaceholder:'Buscar por nombre...',sortRecent:'Más recientes',sortName:'Nombre A–Z',sortProgress:'Más leídos',sortFavorite:'Favoritos',
 emptyBooks:'No se encontró ningún PDF.',emptySites:'No hay sitios guardados.',emptyNotes:'No hay notas guardadas.',sitesTitle:'Enlaces rápidos',sitesDesc:'Accede a tus herramientas favoritas.',
 siteNamePlaceholder:'Nombre del sitio',siteUrlPlaceholder:'https://...',saveLink:'Guardar enlace',notesTitle:'Notas',notesDesc:'Organiza tus ideas y estudios.',
 noteTitlePlaceholder:'Título de la nota',bulletList:'• Lista',clearFormat:'Limpiar',saveNote:'Guardar nota',
@@ -243,18 +272,35 @@ toastSelectPdf:'¡Selecciona un archivo PDF!',toastNotPdf:'El archivo debe ser P
 toastSaveError:'Error al guardar el PDF.',toastDeleteError:'Error al eliminar el PDF.',toastPdfNotFound:'No se encontró el archivo PDF.',toastOpenError:'No se pudo abrir el PDF.',
 toastLinkSaved:'¡Enlace guardado!',toastFillFields:'¡Completa el nombre y la URL!',toastNoteEmpty:'¡Escribe algo en la nota!',toastNoteSaved:'¡Nota guardada!',toastDb:'No se pudo abrir el almacenamiento local.',
 toastLocalPdf:'El PDF se guardó, pero este navegador no permite almacenamiento persistente de archivos en este modo. Abre el HTML mediante un servidor local o publica el sitio para guardar PDFs.',
-coverLabel:'Portada personalizada (opcional)',coverHint:'Si no eliges una imagen, se usará la primera página del PDF como portada.',changeCover:'Cambiar portada',toastCoverUpdated:'¡Portada actualizada!',noteSearchPlaceholder:'🔎 Buscar en tus notas...',numberList:'1. Lista',
+coverLabel:'Portada personalizada (opcional)',coverHint:'Si no eliges una imagen, se usará la primera página del PDF como portada.',changeCover:'Cambiar portada',toastCoverUpdated:'¡Portada actualizada!',noteSearchPlaceholder:'Buscar en tus notas...',numberList:'1. Lista',
 choosePdfFile:'Elegir archivo PDF',choosePdfCoverFile:'Elegir imagen de portada',noFileChosen:'Ningún archivo seleccionado',
-toolBold:'Negrita',toolItalic:'Cursiva',toolUnderline:'Subrayado',toolHeading:'Título',toolNumberList:'Lista numerada',toolChecklist:'Lista de tareas',checklistBtn:'☑ Tarea',toolInsertLink:'Insertar enlace',toolUndo:'Deshacer',toolRedo:'Rehacer',
+toolBold:'Negrita',toolItalic:'Cursiva',toolUnderline:'Subrayado',toolHeading:'Título',toolNumberList:'Lista numerada',toolChecklist:'Lista de tareas',checklistBtn:'Tarea',toolInsertLink:'Insertar enlace',toolUndo:'Deshacer',toolRedo:'Rehacer',
 noteColorLabelText:'Color de la nota:',tagNone:'Sin color',tagBlue:'Azul',tagGreen:'Verde',tagYellow:'Amarillo',tagRed:'Rojo',tagPurple:'Morado',
 markerYellow:'Resaltado amarillo',markerGreen:'Resaltado verde',markerBlue:'Resaltado azul',markerPink:'Resaltado rosa',markerPurple:'Resaltado morado',markerNone:'Quitar resaltado',
-textWhite:'Texto blanco',textRed:'Texto rojo',textBlue:'Texto azul',textGreen:'Texto verde',textYellow:'Texto amarillo'
+textWhite:'Texto blanco',textRed:'Texto rojo',textBlue:'Texto azul',textGreen:'Texto verde',textYellow:'Texto amarillo',
+navTrash:'Papelera',trashTitle:'Papelera',trashDesc:'Los elementos eliminados permanecen aquí 3 días antes de eliminarse definitivamente.',emptyTrash:'La papelera está vacía.',
+restore:'Restaurar',deleteForever:'Eliminar definitivamente',trashExpiresIn:'Expira en {n} día(s)',typeBook:'PDF',typeSite:'Sitio',typeNote:'Nota',
+toastMovedTrash:'¡Movido a la papelera!',toastRestored:'¡Elemento restaurado!',toastPurged:'Elemento eliminado definitivamente.',confirmPurge:'¿Eliminar este elemento definitivamente? Esta acción no se puede deshacer.',emptyTrashBtn:'Vaciar papelera'
 }};
 
 let currentLang=localStorage.getItem('bluevenger_lang')||'pt-BR';
 let db=null,books=[],sites=[],notes=[],currentEditNoteId=null,pdfDoc=null,pageObserver=null,currentBookId=null,scale=1,fitScale=1,storageMode='idb';
 
 const $=id=>document.getElementById(id);
+const ICONS={
+ file:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
+ fileText:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>',
+ link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><path d="M8 12h8"/></svg>',
+ image:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+ starOutline:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+ starFilled:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+ pinOutline:'📌',
+ pinFilled:'📌',
+ clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+ edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg>',
+ copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+ trashCan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
+};
 function setReaderPageCounter(n,total){
  const el=$('pageCounter');if(el)el.textContent=`${n} / ${total}`;
  const pill=$('pageCounterPill');if(pill){pill.classList.remove('bump');void pill.offsetWidth;pill.classList.add('bump')}
@@ -269,8 +315,8 @@ window.addEventListener('click',e=>{if(!e.target.closest('.lang-selector')){$('l
 function setLanguage(lang){
   if(!translations[lang])lang='pt-BR';
   currentLang=lang;localStorage.setItem('bluevenger_lang',lang);
-  $('currentFlag').textContent=lang==='es-MX'?'🇲🇽':'🇧🇷';
   $('currentLangLabel').textContent=lang==='es-MX'?'ES-MX':'PT-BR';
+  $('currentLangFlag').textContent=lang==='es-MX'?'🇲🇽':'🇧🇷';
   $('langMenu').classList.remove('show');$('langBtn').setAttribute('aria-expanded','false');
   document.documentElement.lang=lang;
   document.title=lang==='es-MX'?'BlueVenger — Biblioteca':'BlueVenger — Biblioteca';
@@ -296,10 +342,12 @@ function localGet(key,def=[]){try{return JSON.parse(localStorage.getItem('blueve
 function localSet(key,val){try{localStorage.setItem('bluevenger_'+key,JSON.stringify(val));return true}catch(e){return false}}
 
 function switchTab(id){
- ['libraryPage','sitesPage','notesPage'].forEach(p=>{const el=$(p);el.style.display=p===id?'block':'none';if(p===id){el.classList.remove('fade-in');void el.offsetWidth;el.classList.add('fade-in')}});
+ ['libraryPage','sitesPage','notesPage','trashPage'].forEach(p=>{const el=$(p);el.style.display=p===id?'block':'none';if(p===id){el.classList.remove('fade-in');void el.offsetWidth;el.classList.add('fade-in')}});
  $('navLib').className=id==='libraryPage'?'active':'';
  $('navSites').className=id==='sitesPage'?'active':'';
  $('navNotes').className=id==='notesPage'?'active':'';
+ $('navTrash').className=id==='trashPage'?'active':'';
+ if(id==='trashPage')renderTrash();
 }
 function openAddModal(){$('addModal').classList.add('show');updateFileLabel('pdfFile','pdfFileName');updateFileLabel('pdfCoverFile','pdfCoverFileName')}
 function closeAddModal(){$('addModal').classList.remove('show')}
@@ -321,12 +369,17 @@ function addSite(){
  try{const tx=db.transaction('sites','readwrite');tx.objectStore('sites').put(item);tx.oncomplete=()=>{$('siteName').value='';$('siteUrl').value='';loadSites();showToast(t('toastLinkSaved'))};tx.onerror=()=>{sites.unshift(item);localSet('sites',sites.slice().reverse());renderSites();showToast(t('toastLinkSaved'))}}catch(e){sites.unshift(item);localSet('sites',sites.slice().reverse());renderSites();showToast(t('toastLinkSaved'))}
 }
 function deleteSite(id){
+ const s=sites.find(x=>x.id===id);if(!s)return;s.deletedAt=Date.now();
+ if(storageMode==='local'){localSet('sites',sites.slice().reverse());renderSites();showToast(t('toastMovedTrash'));return}
+ try{const tx=db.transaction('sites','readwrite');tx.objectStore('sites').put(s);tx.oncomplete=()=>{renderSites();showToast(t('toastMovedTrash'))};tx.onerror=()=>{localSet('sites',sites.slice().reverse());renderSites();showToast(t('toastMovedTrash'))}}catch(e){localSet('sites',sites.slice().reverse());renderSites();showToast(t('toastMovedTrash'))}
+}
+function purgeSite(id){
  if(storageMode==='local'){sites=sites.filter(s=>s.id!==id);localSet('sites',sites.slice().reverse());return renderSites()}
  try{const tx=db.transaction('sites','readwrite');tx.objectStore('sites').delete(id);tx.oncomplete=loadSites;tx.onerror=()=>{sites=sites.filter(s=>s.id!==id);localSet('sites',sites.slice().reverse());renderSites()}}catch(e){sites=sites.filter(s=>s.id!==id);localSet('sites',sites.slice().reverse());renderSites()}
 }
 function renderSites(){
- const c=$('sites');if(!sites.length){c.innerHTML=`<div class="empty">${t('emptySites')}</div>`;return}
- c.innerHTML=sites.map(s=>`<div class="site"><div class="info"><strong>${escapeHTML(s.name)}</strong><small>${escapeHTML(s.url)}</small></div><button class="primary small" onclick="openSite('${safeJS(s.url)}')">${t('access')}</button><button class="danger small" onclick="deleteSite('${safeJS(s.id)}')">${t('delete')}</button></div>`).join('')
+ const c=$('sites'),active=sites.filter(s=>!s.deletedAt);if(!active.length){c.innerHTML=`<div class="empty">${t('emptySites')}</div>`;return}
+ c.innerHTML=active.map(s=>`<div class="site"><div class="info"><strong>${escapeHTML(s.name)}</strong><small>${escapeHTML(s.url)}</small></div><button class="primary small" onclick="openSite('${safeJS(s.url)}')">${t('access')}</button><button class="danger small" onclick="deleteSite('${safeJS(s.id)}')">${t('delete')}</button></div>`).join('')
 }
 function openSite(url){window.open(url,'_blank','noopener,noreferrer')}
 
@@ -384,9 +437,13 @@ function saveNote(){
 function finishNoteSave(){currentEditNoteId=null;$('noteTitleInput').value='';$('noteContentInput').innerHTML='';setNoteColor('default');updateNoteMeta();loadNotes();showToast(t('toastNoteSaved'))}
 function editNote(id){const n=notes.find(x=>x.id===id);if(!n)return;currentEditNoteId=id;$('noteTitleInput').value=n.title;$('noteContentInput').innerHTML=n.content;setNoteColor(n.color||'default');updateNoteMeta();switchTab('notesPage');scrollTo({top:0,behavior:'smooth'})}
 function deleteNote(id){
- if(!confirm(currentLang==='es-MX'?'¿Eliminar esta nota?':'Excluir esta anotação?'))return;
- if(storageMode==='local'){notes=notes.filter(n=>n.id!==id);localSet('notes',notes.slice().reverse());if(currentEditNoteId===id)currentEditNoteId=null;return renderNotes()}
- try{const tx=db.transaction('notes','readwrite');tx.objectStore('notes').delete(id);tx.oncomplete=()=>{if(currentEditNoteId===id)currentEditNoteId=null;loadNotes()};tx.onerror=()=>{notes=notes.filter(n=>n.id!==id);localSet('notes',notes.slice().reverse());renderNotes()}}catch(e){notes=notes.filter(n=>n.id!==id);localSet('notes',notes.slice().reverse());renderNotes()}
+ const n=notes.find(x=>x.id===id);if(!n)return;n.deletedAt=Date.now();if(currentEditNoteId===id)currentEditNoteId=null;
+ if(storageMode==='local'){localSet('notes',notes.slice().reverse());renderNotes();showToast(t('toastMovedTrash'));return}
+ try{const tx=db.transaction('notes','readwrite');tx.objectStore('notes').put(n);tx.oncomplete=()=>{renderNotes();showToast(t('toastMovedTrash'))};tx.onerror=()=>{localSet('notes',notes.slice().reverse());renderNotes();showToast(t('toastMovedTrash'))}}catch(e){localSet('notes',notes.slice().reverse());renderNotes();showToast(t('toastMovedTrash'))}
+}
+function purgeNote(id){
+ if(storageMode==='local'){notes=notes.filter(n=>n.id!==id);localSet('notes',notes.slice().reverse());return renderNotes()}
+ try{const tx=db.transaction('notes','readwrite');tx.objectStore('notes').delete(id);tx.oncomplete=loadNotes;tx.onerror=()=>{notes=notes.filter(n=>n.id!==id);localSet('notes',notes.slice().reverse());renderNotes()}}catch(e){notes=notes.filter(n=>n.id!==id);localSet('notes',notes.slice().reverse());renderNotes()}
 }
 function togglePinNote(id){
  const n=notes.find(x=>x.id===id);if(!n)return;n.pinned=!n.pinned;
@@ -401,14 +458,14 @@ function duplicateNote(id){
 }
 function renderNotes(){
  const c=$('notesContainer'),q=(($('noteSearch')&&$('noteSearch').value)||'').toLowerCase().trim();
- let list=notes.filter(n=>!q||String(n.title||'').toLowerCase().includes(q)||String(n.content||'').toLowerCase().includes(q));
+ let list=notes.filter(n=>!n.deletedAt&&(!q||String(n.title||'').toLowerCase().includes(q)||String(n.content||'').toLowerCase().includes(q)));
  if(!list.length){c.innerHTML=`<div class="empty">${t('emptyNotes')}</div>`;return}
  list=list.slice().sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
  const pinLabel=currentLang==='es-MX'?'Fijar':'Fixar',dupLabel=currentLang==='es-MX'?'Duplicar':'Duplicar';
  c.innerHTML=list.map((n,i)=>{
   const dateStr=n.updatedAt?new Date(n.updatedAt).toLocaleString(currentLang==='es-MX'?'es-MX':'pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
   const tagColor=n.color&&n.color!=='default'?n.color:'transparent';
-  return `<div class="site note-card" style="flex-direction:column;align-items:stretch;animation-delay:${Math.min(i*40,320)}ms;border-left-color:${tagColor}"><div class="note-card-head"><strong>${n.pinned?'📌 ':''}${escapeHTML(n.title)}</strong>${tagColor!=='transparent'?`<span class="note-tag-mini" style="background:${tagColor}"></span>`:''}</div>${dateStr?`<div class="note-date">🕒 ${dateStr}</div>`:''}<div style="background:#030712;padding:12px;border-radius:10px;margin-top:8px;font-size:14px;overflow:auto">${n.content}</div><div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="primary small" onclick="editNote('${safeJS(n.id)}')">✏️ ${t('edit')}</button><button class="favorite small icon-btn" onclick="togglePinNote('${safeJS(n.id)}')" title="${pinLabel}">${n.pinned?'📌':'📍'}</button><button class="small icon-btn" onclick="duplicateNote('${safeJS(n.id)}')" title="${dupLabel}">⧉</button><button class="danger small" onclick="deleteNote('${safeJS(n.id)}')">${t('delete')}</button></div></div>`
+  return `<div class="site note-card" style="flex-direction:column;align-items:stretch;animation-delay:${Math.min(i*40,320)}ms;border-left-color:${tagColor}"><div class="note-card-head"><strong>${n.pinned?`<span class="inline-ic" aria-hidden="true">${ICONS.pinFilled}</span> `:''}${escapeHTML(n.title)}</strong>${tagColor!=='transparent'?`<span class="note-tag-mini" style="background:${tagColor}"></span>`:''}</div>${dateStr?`<div class="note-date"><span class="inline-ic" aria-hidden="true">${ICONS.clock}</span>${dateStr}</div>`:''}<div style="background:#030712;padding:12px;border-radius:10px;margin-top:8px;font-size:14px;overflow:auto">${n.content}</div><div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="primary small" onclick="editNote('${safeJS(n.id)}')"><span class="inline-ic" aria-hidden="true">${ICONS.edit}</span>${t('edit')}</button><button class="favorite small icon-btn" onclick="togglePinNote('${safeJS(n.id)}')" title="${pinLabel}">${n.pinned?ICONS.pinFilled:ICONS.pinOutline}</button><button class="small icon-btn" onclick="duplicateNote('${safeJS(n.id)}')" title="${dupLabel}">${ICONS.copy}</button><button class="danger small" onclick="deleteNote('${safeJS(n.id)}')">${t('delete')}</button></div></div>`
  }).join('')
 }
 
@@ -423,10 +480,10 @@ function persistBook(b){
 }
 function toggleFavorite(id){const b=books.find(x=>x.id===id);if(!b)return;b.favorite=!b.favorite;b.updatedAt=Date.now();persistBook(b);renderBooks()}
 function renderBooks(){
- const q=($('bookSearch').value||'').toLowerCase().trim(),sort=$('bookSort').value;let list=books.filter(b=>String(b.title||'').toLowerCase().includes(q));
+ const q=($('bookSearch').value||'').toLowerCase().trim(),sort=$('bookSort').value;let list=books.filter(b=>!b.deletedAt&&String(b.title||'').toLowerCase().includes(q));
  if(sort==='name')list.sort((a,b)=>String(a.title).localeCompare(String(b.title),'pt-BR'));else if(sort==='progress')list.sort((a,b)=>progress(b)-progress(a));else if(sort==='favorite')list=list.filter(b=>b.favorite);else list.sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
  const c=$('grid');if(!list.length){c.innerHTML=`<div class="empty">${t('emptyBooks')}</div>`;return}
- c.innerHTML=list.map((b,i)=>{const pct=progress(b);return `<div class="card" style="animation-delay:${Math.min(i*35,350)}ms"><div class="cover-wrap" onclick="openReader('${safeJS(b.id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openReader('${safeJS(b.id)}')}" role="button" tabindex="0" aria-label="${escapeHTML(t('read'))+': '+escapeHTML(b.title)}" title="${escapeHTML(t('read'))}"><div class="cover">${b.cover?`<img src="${b.cover}" alt="">`:'<div class="cover-icon">📄</div>'}</div></div><div class="cardbody"><div class="title" title="${escapeHTML(b.title)}">${escapeHTML(b.title)}</div><div class="page-stats-row"><span class="page-badge" title="${escapeHTML(t('pageText'))} ${b.currentPage||1} ${escapeHTML(t('ofText'))} ${b.totalPages||1}"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><b>${b.currentPage||1}</b><span class="pb-sep">/</span>${b.totalPages||1}</span><span class="pct-badge" title="${pct}% ${escapeHTML(t('completedText'))}">${pct}%</span></div><div class="progress"><i style="width:${pct}%"></i></div><div class="actions"><button class="primary small" onclick="openReader('${safeJS(b.id)}')">${t('read')}</button><button class="favorite small" onclick="toggleFavorite('${safeJS(b.id)}')">${b.favorite?'★':'☆'}</button><button class="small icon-btn" title="${t('changeCover')}" onclick="openCoverPicker('${safeJS(b.id)}')">🖼️</button><button class="danger small" onclick="deleteBook('${safeJS(b.id)}')">${t('delete')}</button></div></div></div>`}).join('')
+ c.innerHTML=list.map((b,i)=>{const pct=progress(b);return `<div class="card" style="animation-delay:${Math.min(i*35,350)}ms"><div class="cover-wrap" onclick="openReader('${safeJS(b.id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openReader('${safeJS(b.id)}')}" role="button" tabindex="0" aria-label="${escapeHTML(t('read'))+': '+escapeHTML(b.title)}" title="${escapeHTML(t('read'))}"><div class="cover">${b.cover?`<img src="${b.cover}" alt="">`:`<div class="cover-icon">${ICONS.file}</div>`}</div></div><div class="cardbody"><div class="title" title="${escapeHTML(b.title)}">${escapeHTML(b.title)}</div><div class="page-stats-row"><span class="page-badge" title="${escapeHTML(t('pageText'))} ${b.currentPage||1} ${escapeHTML(t('ofText'))} ${b.totalPages||1}"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><b>${b.currentPage||1}</b><span class="pb-sep">/</span>${b.totalPages||1}</span><span class="pct-badge" title="${pct}% ${escapeHTML(t('completedText'))}">${pct}%</span></div><div class="progress"><i style="width:${pct}%"></i></div><div class="actions"><button class="primary small" onclick="openReader('${safeJS(b.id)}')">${t('read')}</button><button class="favorite small icon-btn" onclick="toggleFavorite('${safeJS(b.id)}')" title="${t('sortFavorite')}">${b.favorite?ICONS.starFilled:ICONS.starOutline}</button><button class="small icon-btn" title="${t('changeCover')}" onclick="openCoverPicker('${safeJS(b.id)}')">${ICONS.image}</button><button class="danger small" onclick="deleteBook('${safeJS(b.id)}')">${t('delete')}</button></div></div></div>`}).join('')
 }
 
 function fileToCoverDataURL(file,maxW){
@@ -480,9 +537,16 @@ async function handleCoverPicked(input){
 }
 function deleteBook(id){
  if(!id)return;
- if(!confirm(currentLang==='es-MX'?'¿Eliminar este PDF de la biblioteca?':'Excluir este PDF da biblioteca?'))return;
+ const b=books.find(x=>x.id===id);if(!b)return;
+ if(currentBookId===id)closeReader();
+ b.deletedAt=Date.now();
+ if(storageMode==='local'){localSet('books',books);renderBooks();showToast(t('toastMovedTrash'));return}
+ try{const tx=db.transaction('books','readwrite');tx.objectStore('books').put(b);tx.oncomplete=()=>{renderBooks();showToast(t('toastMovedTrash'))};tx.onerror=()=>showToast(t('toastDeleteError'))}catch(e){showToast(t('toastDeleteError'))}
+}
+function purgeBook(id){
+ if(!id)return;
  if(storageMode==='local'){books=books.filter(b=>b.id!==id);localSet('books',books);renderBooks();return}
- try{if(currentBookId===id)closeReader();const tx=db.transaction(['books','pdfs'],'readwrite');tx.objectStore('books').delete(id);tx.objectStore('pdfs').delete(id);tx.oncomplete=()=>{books=books.filter(b=>b.id!==id);renderBooks();showToast(currentLang==='es-MX'?'PDF eliminado.':'PDF excluído.')};tx.onerror=()=>showToast(t('toastDeleteError'))}catch(e){showToast(t('toastDeleteError'))}
+ try{if(currentBookId===id)closeReader();const tx=db.transaction(['books','pdfs'],'readwrite');tx.objectStore('books').delete(id);tx.objectStore('pdfs').delete(id);tx.oncomplete=()=>{books=books.filter(b=>b.id!==id);renderBooks();showToast(t('toastPurged'))};tx.onerror=()=>showToast(t('toastDeleteError'))}catch(e){showToast(t('toastDeleteError'))}
 }
 async function openReader(id){
  const book=books.find(b=>b.id===id);if(!book)return;if(!db||storageMode!=='idb')return showToast(t('toastLocalPdf'));
@@ -614,11 +678,58 @@ document.addEventListener('keydown',e=>{
  else if(e.key==='0')fitWidth();
  else if(e.key==='Escape')closeReader();
 });
+const TRASH_DAYS=3,TRASH_MS=TRASH_DAYS*24*60*60*1000;
+function getTrashItems(){
+ const items=[];
+ books.forEach(b=>{if(b.deletedAt)items.push({type:'book',id:b.id,name:b.title,deletedAt:b.deletedAt})});
+ sites.forEach(s=>{if(s.deletedAt)items.push({type:'site',id:s.id,name:s.name,deletedAt:s.deletedAt})});
+ notes.forEach(n=>{if(n.deletedAt)items.push({type:'note',id:n.id,name:n.title,deletedAt:n.deletedAt})});
+ return items.sort((a,b)=>b.deletedAt-a.deletedAt);
+}
+function restoreItem(type,id){
+ const list=type==='book'?books:type==='site'?sites:notes,item=list.find(x=>x.id===id);if(!item)return;
+ delete item.deletedAt;
+ const store=type==='book'?'books':type==='site'?'sites':'notes';
+ if(storageMode==='local'){
+  if(store==='books')localSet('books',books);else localSet(store,list.slice().reverse());
+  refreshAfterRestore();return;
+ }
+ try{const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(item);tx.oncomplete=refreshAfterRestore;tx.onerror=()=>{if(store==='books')localSet('books',books);else localSet(store,list.slice().reverse());refreshAfterRestore()}}catch(e){if(store==='books')localSet('books',books);else localSet(store,list.slice().reverse());refreshAfterRestore()}
+}
+function refreshAfterRestore(){renderBooks();renderSites();renderNotes();renderTrash();showToast(t('toastRestored'))}
+function purgeItemConfirmed(type,id){
+ if(type==='book')purgeBook(id);else if(type==='site')purgeSite(id);else purgeNote(id);
+ setTimeout(renderTrash,50);
+}
+function purgeItem(type,id){
+ if(!confirm(t('confirmPurge')))return;
+ purgeItemConfirmed(type,id);
+}
+function emptyTrashNow(){
+ const items=getTrashItems();if(!items.length)return;
+ if(!confirm(t('confirmPurge')))return;
+ items.forEach(it=>purgeItemConfirmed(it.type,it.id));
+}
+function autoPurgeExpired(){
+ const now=Date.now(),expired=getTrashItems().filter(it=>now-it.deletedAt>=TRASH_MS);
+ expired.forEach(it=>purgeItemConfirmed(it.type,it.id));
+}
+function renderTrash(){
+ const c=$('trashContainer');if(!c)return;
+ const items=getTrashItems();
+ if(!items.length){c.innerHTML=`<div class="empty">${t('emptyTrash')}</div>`;return}
+ const typeLabel={book:t('typeBook'),site:t('typeSite'),note:t('typeNote')},typeIcon={book:ICONS.file,site:ICONS.link,note:ICONS.fileText};
+ c.innerHTML=items.map(it=>{
+  const daysLeft=Math.max(0,Math.ceil((it.deletedAt+TRASH_MS-Date.now())/86400000));
+  const expiresTxt=t('trashExpiresIn').replace('{n}',daysLeft);
+  return `<div class="site"><div class="info"><strong><span class="inline-ic" aria-hidden="true">${typeIcon[it.type]}</span>${escapeHTML(it.name||'')}</strong><small>${escapeHTML(typeLabel[it.type])} · ${escapeHTML(expiresTxt)}</small></div><button class="primary small" onclick="restoreItem('${it.type}','${safeJS(it.id)}')">${t('restore')}</button><button class="danger small" onclick="purgeItem('${it.type}','${safeJS(it.id)}')">${t('deleteForever')}</button></div>`;
+ }).join('');
+}
 function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function safeJS(s){return String(s??'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}
 window.addEventListener('resize',()=>{if($('reader').classList.contains('show')&&pdfDoc){clearTimeout(window._resize);window._resize=setTimeout(renderPages,250)}});
 
-window.onload=async()=>{setLanguage(currentLang);await openDB();loadSites();loadNotes();loadBooks()};
+window.onload=async()=>{setLanguage(currentLang);await openDB();loadSites();loadNotes();loadBooks();setTimeout(autoPurgeExpired,900)};
 window.addEventListener('pagehide',saveCurrentPage);document.addEventListener('visibilitychange',()=>{if(document.hidden)saveCurrentPage()});
 </script>
 
@@ -629,7 +740,8 @@ window.addEventListener('pagehide',saveCurrentPage);document.addEventListener('v
 .pv-row{display:flex;gap:8px;align-items:center}
 .pv-input{flex:1;min-width:0;background:#0f172a;border:1px solid #1e293b;color:#f8fafc;padding:10px 12px;border-radius:10px;outline:none;font-size:14px}
 .pv-input:focus{border-color:#3b82f6}
-.pv-btn{flex:0 0 auto;background:#1e293b;color:#f8fafc;border:0;padding:9px 13px;border-radius:9px;font-weight:700;cursor:pointer;font-size:14px}
+.pv-btn{flex:0 0 auto;background:#1e293b;color:#f8fafc;border:0;padding:9px 13px;border-radius:9px;font-weight:700;cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center}
+.pv-btn svg{display:block}
 .pv-btn-primary{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
 .pv-btn:disabled{opacity:.55;cursor:default}
 .pv-status{color:#94a3b8;font-size:12px}
@@ -674,7 +786,7 @@ function pvInjectUI(){
  var searchBtn=document.createElement('button');
  searchBtn.type='button';
  searchBtn.setAttribute('aria-label',pvT('searchAria'));
- searchBtn.textContent='🔍';
+ searchBtn.innerHTML='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>';
  searchBtn.addEventListener('click',function(){
   var panel=document.getElementById('pvPanel');
   if(panel&&panel.classList.contains('show'))pvClosePanel();else pvOpenPanel();
@@ -687,7 +799,7 @@ function pvInjectUI(){
  panel.innerHTML=
   '<div class="pv-row">'+
    '<input id="pvInput" class="pv-input" placeholder="'+pvEsc(pvT('ph'))+'">'+
-   '<button id="pvBtnSearch" type="button" class="pv-btn pv-btn-primary">🔎</button>'+
+   '<button id="pvBtnSearch" type="button" class="pv-btn pv-btn-primary"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>'+
    '<button id="pvBtnClose" type="button" class="pv-btn" aria-label="'+pvEsc(pvT('closeAria'))+'">✕</button>'+
   '</div>'+
   '<div id="pvResults" class="pv-results"></div>';
@@ -796,7 +908,7 @@ async function pvRunSearch(){
  pvState.term=term;
  pvState.pageResults=found;
  pvState.currentIndex=found.length?0:-1;
- if(btn){btn.disabled=false;btn.textContent='🔎'}
+ if(btn){btn.disabled=false;btn.innerHTML='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>'}
  pvRenderResults();
  if(found.length){
   pvGoTo(0);
@@ -1231,13 +1343,172 @@ try{
 </script>
 <!-- ===================== FIM: Marcar páginas nos PDFs ===================== -->
 
+<!-- ===================== INÍCIO: Céu dinâmico (estrelas cadentes à noite / pássaros de dia) ===================== -->
+<style>
+/* Camada decorativa fixa, atrás de todo o conteúdo, sem capturar cliques —
+   por isso não interfere em nenhum botão, link ou funcionalidade já existente. */
+.sky-fx{position:fixed;inset:-15%;z-index:0;overflow:hidden;pointer-events:none;background-image:radial-gradient(circle at 18% -8%,#1e3a8a3d 0%,transparent 42%),radial-gradient(circle at 88% 4%,#4c1d9536 0%,transparent 38%),radial-gradient(circle at 50% 0%,#1e1b4b 0%,#030712 55%);background-repeat:no-repeat;background-size:cover}
+.sky-layer{position:absolute;inset:0;opacity:0;transition:opacity 2.4s ease}
+.sky-layer.on{opacity:1}
+
+/* --- brilho ambiente, no mesmo tom azul do fundo, só pra dar profundidade --- */
+.sky-glow{position:absolute;border-radius:50%;filter:blur(60px)}
+.sky-glow-night{top:-12%;right:-10%;width:48vw;height:48vw;background:radial-gradient(circle,#60a5fa33,#1e3a8a14 55%,transparent 75%);animation:skyGlowPulse 9s ease-in-out infinite}
+.sky-glow-day{top:-16%;left:-8%;width:52vw;height:52vw;background:radial-gradient(circle,#93c5fd29,#3b82f610 55%,transparent 75%)}
+@keyframes skyGlowPulse{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* --- campo de estrelas fixas, piscando bem de leve --- */
+.sky-star{position:absolute;border-radius:50%;background:#eff6ff;animation-name:skyTwinkle;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+@keyframes skyTwinkle{0%,100%{opacity:.15;transform:scale(.75)}50%{opacity:1;transform:scale(1.15)}}
+
+/* --- estrela cadente: "wrap" parado só com a rotação (ângulo da queda); quem se move é o
+   traço interno, sempre no mesmo eixo local — agora com uma cabeça brilhante na ponta. --- */
+.sky-shoot-wrap{position:absolute;width:1px;height:1px}
+.sky-shoot{position:absolute;top:0;left:0;opacity:0;clip-path:polygon(0% 45%,100% 0%,100% 100%,0% 55%);background:linear-gradient(90deg,transparent,var(--shoot-c1,#60a5fa) 45%,var(--shoot-c2,#eff6ff));box-shadow:0 0 14px 1px var(--shoot-glow,#93c5fd8c);animation-name:skyShoot;animation-timing-function:cubic-bezier(.2,.6,.3,1);animation-iteration-count:infinite}
+.sky-shoot::after{content:'';position:absolute;right:-2px;top:50%;width:6px;height:6px;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle,#fff,#dbeafe 60%,transparent 75%);box-shadow:0 0 14px 4px var(--shoot-glow,#bfdbfed9);animation:skyHeadPulse 1.1s ease-in-out infinite}
+@keyframes skyHeadPulse{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-50%) scale(1.35)}}
+@keyframes skyShoot{0%{opacity:0;transform:translateX(0) scale(.85)}3%{opacity:1;transform:translateX(0) scale(1)}22%{opacity:0;transform:translateX(var(--shoot-dist,400px)) scale(1)}100%{opacity:0;transform:translateX(var(--shoot-dist,400px)) scale(1)}}
+
+/* --- nuvens bem sutis, deslizando devagar --- */
+.sky-cloud{position:absolute;border-radius:50%;background:radial-gradient(circle,#dbeafe28,#dbeafe08 60%,transparent 75%);filter:blur(3px);animation-name:skyDrift;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes skyDrift{0%{transform:translateX(-25vw)}100%{transform:translateX(130vw)}}
+
+/* --- pássaro: o wrap externo cuida do voo (translação pela tela, com leve variação por ave
+   via variáveis CSS); o SVG interno só bate asa (scaleY). Tamanho/opacidade variam por ave
+   pra dar sensação de profundidade (mais perto = maior, mais opaco e mais rápido). --- */
+.sky-bird{position:absolute;left:-10vw;color:#bfdbfe;filter:drop-shadow(0 2px 5px #0007);animation-name:skyFly;animation-timing-function:linear;animation-iteration-count:infinite}
+.sky-bird svg{width:100%;height:100%;display:block;animation:skyBob .9s ease-in-out infinite;transform-origin:50% 50%}
+.sky-wing{transform-box:view-box;transform-origin:24px 13px;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-duration:var(--flap-dur,.8s)}
+.sky-wing-l{animation-name:skyFlapL}
+.sky-wing-r{animation-name:skyFlapR}
+@keyframes skyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes skyFlapL{0%,100%{transform:rotate(-14deg) scaleY(1)}50%{transform:rotate(30deg) scaleY(.78)}}
+@keyframes skyFlapR{0%,100%{transform:rotate(14deg) scaleY(1)}50%{transform:rotate(-30deg) scaleY(.78)}}
+@keyframes skyFly{0%{transform:translate(0,0)}50%{transform:translate(62vw,var(--fly-mid,-26px))}100%{transform:translate(126vw,var(--fly-end,10px))}}
+
+@media(max-width:650px){.sky-glow{filter:blur(42px)}}
+@media(prefers-reduced-motion:reduce){.sky-shoot,.sky-bird,.sky-bird svg,.sky-wing-l,.sky-wing-r,.sky-star,.sky-cloud,.sky-glow-night{animation:none!important}}
+</style>
 <script>
-if('serviceWorker' in navigator){
- window.addEventListener('load',function(){
-  navigator.serviceWorker.register('sw.js').catch(function(e){console.error('Falha ao registrar service worker:',e)});
- });
+(function(){
+'use strict';
+/* Decide dia/noite pela hora real do aparelho (sem mostrar relógio nenhum) e troca a camada
+   de fundo sozinho, revendo a cada poucos minutos — a pessoa só percebe o resultado (pássaros
+   ou estrelas cadentes), nunca o cálculo. Tudo aqui é isolado: não lê nem altera nenhuma
+   variável/função do restante do app, então não tem como comprometer o resto do código. */
+function skyRand(min,max){return Math.random()*(max-min)+min}
+function skyIsNight(){var h=new Date().getHours();return h<6||h>=18}
+
+function skyBuildGlow(container,cls){
+ var g=document.createElement('div');
+ g.className='sky-glow '+cls;
+ container.appendChild(g);
 }
+function skyBuildStarfield(container,count){
+ for(var i=0;i<count;i++){
+  var s=document.createElement('div'),size=skyRand(1,2.6);
+  s.className='sky-star';
+  s.style.left=skyRand(0,100)+'%';
+  s.style.top=skyRand(0,68)+'%';
+  s.style.width=size.toFixed(2)+'px';
+  s.style.height=size.toFixed(2)+'px';
+  s.style.animationDuration=skyRand(2.2,5).toFixed(2)+'s';
+  s.style.animationDelay='-'+skyRand(0,5).toFixed(2)+'s';
+  container.appendChild(s);
+ }
+}
+function skyBuildShooting(container,count){
+ var palettes=[['#60a5fa','#eff6ff','#93c5fd99'],['#93c5fd','#ffffff','#bfdbfeb0'],['#3b82f6','#e0f2fe','#60a5fa8f']];
+ var lenMax=window.innerWidth<650?150:200;
+ for(var i=0;i<count;i++){
+  var wrap=document.createElement('div');
+  wrap.className='sky-shoot-wrap';
+  wrap.style.left=skyRand(0,88)+'%';
+  wrap.style.top=skyRand(0,55)+'%';
+  wrap.style.transform='rotate('+skyRand(205,245)+'deg)';
+  var star=document.createElement('div'),len=skyRand(90,lenMax),pal=palettes[i%palettes.length];
+  star.className='sky-shoot';
+  star.style.width=len.toFixed(0)+'px';
+  star.style.height=skyRand(1.6,3).toFixed(1)+'px';
+  star.style.setProperty('--shoot-dist',(len*skyRand(2.2,2.8)).toFixed(0)+'px');
+  star.style.setProperty('--shoot-c1',pal[0]);
+  star.style.setProperty('--shoot-c2',pal[1]);
+  star.style.setProperty('--shoot-glow',pal[2]);
+  star.style.animationDuration=skyRand(4.5,8.5).toFixed(2)+'s';
+  star.style.animationDelay='-'+skyRand(0,16).toFixed(2)+'s';
+  wrap.appendChild(star);
+  container.appendChild(wrap);
+ }
+}
+function skyBuildClouds(container,count){
+ for(var i=0;i<count;i++){
+  var c=document.createElement('div'),w=skyRand(130,250);
+  c.className='sky-cloud';
+  c.style.width=w.toFixed(0)+'px';
+  c.style.height=(w*skyRand(.26,.38)).toFixed(0)+'px';
+  c.style.top=skyRand(4,32)+'%';
+  c.style.left='-25vw';
+  c.style.animationDuration=skyRand(80,150).toFixed(0)+'s';
+  c.style.animationDelay='-'+skyRand(0,110).toFixed(0)+'s';
+  container.appendChild(c);
+ }
+}
+function skyLerp(a,b,t){return Math.round(a+(b-a)*t)}
+function skyBuildBirds(container,count){
+ var far=[59,130,246],near=[219,234,254];
+ for(var i=0;i<count;i++){
+  var depth=skyRand(0,1),size=18+depth*18,b=document.createElement('div');
+  var c=[skyLerp(far[0],near[0],depth),skyLerp(far[1],near[1],depth),skyLerp(far[2],near[2],depth)];
+  var svg='<svg viewBox="0 0 48 26" fill="none"><path class="sky-wing sky-wing-l" fill="currentColor" d="M24 13.5C18 4 8 1.5 1 9c8 2.5 16 4 23 4.5Z"/><path class="sky-wing sky-wing-r" fill="currentColor" d="M24 13.5C30 4 40 1.5 47 9c-8 2.5-16 4-23 4.5Z"/><ellipse cx="24" cy="13.2" rx="2.6" ry="1.6" fill="currentColor"/></svg>';
+  b.className='sky-bird';
+  b.style.color='rgb('+c[0]+','+c[1]+','+c[2]+')';
+  b.style.width=size.toFixed(0)+'px';
+  b.style.height=(size*.54).toFixed(0)+'px';
+  b.style.opacity=(.35+depth*.45).toFixed(2);
+  b.style.top=skyRand(4,42)+'%';
+  b.style.setProperty('--fly-mid',skyRand(-42,-8).toFixed(0)+'px');
+  b.style.setProperty('--fly-end',skyRand(-4,22).toFixed(0)+'px');
+  b.style.setProperty('--flap-dur',skyRand(.55,.95).toFixed(2)+'s');
+  b.style.animationDuration=(44-depth*20).toFixed(1)+'s';
+  b.style.animationDelay='-'+skyRand(0,40).toFixed(1)+'s';
+  b.innerHTML=svg;
+  container.appendChild(b);
+ }
+}
+
+var skyState={mode:null,timer:null};
+function skyApplyMode(){
+ var dayLayer=document.getElementById('skyDayLayer'),nightLayer=document.getElementById('skyNightLayer');
+ if(!dayLayer||!nightLayer)return;
+ var mode=skyIsNight()?'night':'day';
+ if(mode===skyState.mode)return;
+ skyState.mode=mode;
+ if(mode==='night'){nightLayer.classList.add('on');dayLayer.classList.remove('on')}
+ else{dayLayer.classList.add('on');nightLayer.classList.remove('on')}
+}
+function skyInit(){
+ var root=document.getElementById('skyFx');
+ if(!root||root.__skyReady)return;
+ root.__skyReady=true;
+ var dayLayer=document.createElement('div');dayLayer.className='sky-layer';dayLayer.id='skyDayLayer';
+ var nightLayer=document.createElement('div');nightLayer.className='sky-layer';nightLayer.id='skyNightLayer';
+ skyBuildGlow(nightLayer,'sky-glow-night');
+ skyBuildStarfield(nightLayer,45);
+ skyBuildShooting(nightLayer,7);
+ skyBuildGlow(dayLayer,'sky-glow-day');
+ skyBuildClouds(dayLayer,4);
+ skyBuildBirds(dayLayer,6);
+ root.appendChild(dayLayer);
+ root.appendChild(nightLayer);
+ skyApplyMode();
+ clearInterval(skyState.timer);
+ skyState.timer=setInterval(skyApplyMode,5*60*1000);
+ document.addEventListener('visibilitychange',function(){if(!document.hidden)skyApplyMode()});
+}
+try{skyInit()}catch(e){console.error('Falha ao iniciar o céu dinâmico:',e)}
+})();
 </script>
+<!-- ===================== FIM: Céu dinâmico ===================== -->
 
 </body>
 </html>
